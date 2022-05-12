@@ -28,3 +28,13 @@ npm i
 ## Your job
 
 Your job is to fix the smart contract so it passes the test
+
+***hardhat***
+```
+npm run test
+```
+
+***python***
+```
+pytest tests -s -W ignore::DeprecationWarning
+```
