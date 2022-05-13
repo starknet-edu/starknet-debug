@@ -1,5 +1,3 @@
-from contextlib import contextmanager
-from dataclasses import dataclass
 from functools import reduce
 import os
 import pytest
@@ -26,7 +24,7 @@ class CairoContractTest(TestCase):
         )
 
     @pytest.mark.asyncio
-    async def test_create_propsal_should_work(self):
+    async def test_mock_contract(self):
         res = await self.contract.product_mapping().call()
         self.assertEqual(
             res.call_info.result.pop(), reduce(lambda x, y: x * y, PRODUCT_ARRAY)
