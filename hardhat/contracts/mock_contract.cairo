@@ -26,6 +26,8 @@ func fill_mapping{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
     if array_len == 0:
         return ()
     end
+
+    # This could be useful for debugging...
     let val = [array]
     %{
         print(f"Still {ids.array_len} values to save...") 

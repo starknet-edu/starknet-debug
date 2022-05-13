@@ -13,7 +13,8 @@ func view_product{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
     array_len : felt, array : BasicStruct*
 ) -> (res : felt):
     # This could be useful for debugging...
-    %{ print(f"computing the product of a {ids.array_len} elements list") %}
+    let val = [array]
+    %{ print(f"Printing {ids.val.first_member=}") %}
     let (res) = array_product(array_len, array)
     let (add) = get_contract_address()
     return (res + add)
