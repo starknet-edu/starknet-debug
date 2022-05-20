@@ -5,3 +5,5 @@ __pycache__
 
 */yarn.lock
 .build/
+mock_logs.txt
+array_logs.txt
