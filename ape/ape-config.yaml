@@ -1,0 +1,5 @@
+name: ape-debug
+plugins:
+  - cairo
+  - starknet
+default_ecosystem: starknet
