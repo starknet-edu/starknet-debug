@@ -1,11 +1,12 @@
 # Starknet debugging
 
-The goal of this tutorial is to see what tool could be useful to debug a smart contract using 2 different testing frameworks:
+The goal of this tutorial is to see what tool could be useful to debug a smart contract using 3 different testing frameworks:
 
 - [hardhat](https://github.com/Shard-Labs/starknet-hardhat-plugin)
 - [native framework](https://www.cairo-lang.org/docs/hello_starknet/unit_tests.html)
+- [ape](https://github.com/ApeWorX/ape-starknet)
 
-We'll use a functionnality of the Cairo language called [hints](https://starknet.io/docs/how_cairo_works/hints.html), which allows you to inject python arbitrarily in your code. Hint usage is heavily restricted on StarkNet and is unaplicable in Smart Contracts. But it is extremely useful to debug your contract.
+We'll use a functionality of the Cairo language called [hints](https://starknet.io/docs/how_cairo_works/hints.html), which allows you to inject python arbitrarily in your code. Hint usage is heavily restricted on StarkNet and is unapplicable in Smart Contracts. But it is extremely useful to debug your contract.
 
 ## Smart contract
 
@@ -76,4 +77,25 @@ Or all at once with:
 
 ```bash
 pytest -s -W ignore::DeprecationWarning
+```
+
+### Ape
+
+To run the ape unit test files you'll need ape configured. This is how you can do it:
+
+```bash
+pip install eth-ape "starknet.py==0.2.2a0"
+ape plugins install cairo starknet
+```
+
+If you start from scratch you'd have to init your project and update the [`ape-config.yaml`](ape/ape-config.yaml) file but here it's already done.
+
+If you want to learn a little bit more about ape [here](https://www.youtube.com/watch?v=6nfUpYKLe6Q) is a video that you can watch which explains the basis of ape for starknet
+
+Since ape hides everything printed by the devnet we can use `print` to debug the contract. I chose to save the logs in a file but we could also setup a server that would receive data from the smart-contract execution or whatever other technique you can think of.
+
+To run the tests run the following command:
+
+```bash
+ape test
 ```

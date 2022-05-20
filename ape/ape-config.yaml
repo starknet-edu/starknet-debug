@@ -1,11 +1,5 @@
 name: ape-debug
 plugins:
-  - name: cairo
-  - name: starknet
-
+  - cairo
+  - starknet
 default_ecosystem: starknet
-
-# deployments:
-#   starknet:
-#     devnet:
-#       - contract_type: Tuto
