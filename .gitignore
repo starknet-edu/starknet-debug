@@ -4,3 +4,4 @@ starknet-artifacts
 __pycache__
 
 */yarn.lock
+.build/

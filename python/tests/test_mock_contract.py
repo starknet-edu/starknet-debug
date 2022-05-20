@@ -27,5 +27,7 @@ class CairoContractTest(TestCase):
     async def test_mock_contract(self):
         res = await self.contract.product_mapping().call()
         self.assertEqual(
-            res.call_info.result.pop(), reduce(lambda x, y: x * y, PRODUCT_ARRAY)
+            res.call_info.result.pop(),
+            reduce(lambda x, y: x * y, PRODUCT_ARRAY),
+            "Contract is still not correct",
         )

@@ -26,4 +26,5 @@ class CairoContractTest(TestCase):
             res.call_info.result.pop(),
             self.contract.contract_address
             + reduce(lambda x, y: x * y, list(sum(PRODUCT_ARRAY, ()))),
+            "Contract is still not correct",
         )
