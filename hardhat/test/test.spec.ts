@@ -1,3 +1,5 @@
+// Testing your code using the hard hat StarkNet plugin
+// You will find more information on testing in Hard Hat by following this link https://github.com/Shard-Labs/starknet-hardhat-plugin#testing
 import { expect } from "chai";
 import { starknet } from "hardhat";
 import {
