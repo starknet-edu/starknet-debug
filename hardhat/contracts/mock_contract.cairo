@@ -47,6 +47,9 @@ func product_mapping{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_che
     return (res)
 end
 
+# TODO: Fix the contract so that it returns the product of all the values in
+# the stored array. Example:
+# For the array [7,8,10], the result should be (7*8*10)=560
 func product_mapping_internal{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     len : felt
 ) -> (res : felt):
