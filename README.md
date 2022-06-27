@@ -57,7 +57,7 @@ To run the python unit test files you'll need pytest and asynctest
 pip install pytest asynctest cairo-lang
 ```
 
-The Python testing framework doesn't need to interact with the `starknet-devnet` as it can natively use the testing functions from the `cairo-lang` package so you can also use any python hint you want. To run your python unit tests you can run `pytest`
+The Python testing framework doesn't need to interact with the `starknet-devnet` as it can natively use the testing functions from the `cairo-lang` package so you can also use any python hint you want. You can even add a `breakpoint` in a contract, how powerful is that ? You can run your python unit tests with `pytest` and inspect whatever you want in your contract.
 
 The contracts to fix are [here](python/contracts).
 
