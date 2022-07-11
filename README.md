@@ -55,7 +55,7 @@ This project can be made better and will evolve as StarkNet matures. Your contri
 
 ## Getting started
 
-## Smart contracts that need fixing
+### Smart contracts that need fixing
 
 The first smart contract [`array_contract.cairo`](python/contracts/array_contract.cairo) is a dummy smart contract which has a [view function](https://www.cairo-lang.org/docs/hello_starknet/intro.html) that needs to
 
@@ -68,9 +68,12 @@ The second smart contract [`mock_contract.cairo`](python/contracts/mock_contract
 
 For each of those contracts, and each framework, your goal is that the tests pass correctly.
 
-### Debugging with Hardhat
+​
+​
 
-#### Installing
+## Debugging with Hardhat
+
+### Installing
 
 Run the following command in the hardhat directory to install all dependencies, as well `cairo-lang` and the [`starknet-devnet`](https://github.com/Shard-Labs/starknet-devnet).
 
@@ -81,7 +84,7 @@ pip install "starknet-devnet>=0.2.1" cairo-lang
 
 To setup a full `cairo` env you can take a look at [this article](https://medium.com/starknet-edu/the-ultimate-starknet-dev-environment-716724aef4a7). 
 
-#### Including hints in your contract
+### Including hints in your contract
 By default, StarkNet contracts can not use any [hints](https://starknet.io/docs/how_cairo_works/hints.html) in their code. `cairo-lang` refuses to compile contracts including hints. 
 
 However, starknet-devnet lets you run hints if you compile your contracts so that they include them. 
@@ -90,7 +93,7 @@ Luckily, an flag has been added in hardhat to compile a contract that includes h
 
 ***To debug a smart contract using hardhat you may want to print variables, there is an example in the smart contract.***
 
-#### Running tests
+### Running tests
 The following command will run the hardhat tests that need to pass, and execute any hints included in the contract in the terminal
 
 ```bash
@@ -102,15 +105,18 @@ The contracts to fix are [here](hardhat/contracts).
 
 You can find the test file [here](hardhat/test/test.spec.ts).
 
-### Python
-#### Installing
+​
+​
+
+## Python
+### Installing
 
 To run the python unit test files you'll need pytest and asynctest
 
 ```bash
 pip install pytest asynctest cairo-lang
 ```
-#### Running tests
+### Running tests
 
 The Python testing framework doesn't need to interact with the `starknet-devnet` as it can natively use the testing functions from the `cairo-lang` package so you can also use any python hint you want. 
 
@@ -141,9 +147,11 @@ Or all at once with:
 ```bash
 pytest -s -W ignore::DeprecationWarning
 ```
+​
+​
 
-### Ape
-#### Installing
+## Ape
+### Installing
 To run the ape unit test files you'll need ape installed and configured. This is how you can do it:
 
 ```bash
@@ -157,7 +165,7 @@ If you want to learn a little bit more about ape [here](https://www.youtube.com/
 
 Since ape hides everything printed by the devnet we can use `print` to debug the contract. I chose to save the logs in a file but we could also setup a server that would receive data from the smart-contract execution or whatever other technique you can think of.
 
-#### Running tests
+### Running tests
 To run the tests run the following command:
 
 ```bash
