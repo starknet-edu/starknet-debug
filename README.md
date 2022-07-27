@@ -202,9 +202,6 @@ NB if you are on MacOS and encountered `[__NSCFConstantString initialize] may ha
 
 add OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES before protostar line e.g.:
 
-```bash
-OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES protostar test --disable-hint-validation
-```
 ## Ape
 
 ### Installing
