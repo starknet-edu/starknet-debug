@@ -116,7 +116,7 @@ You can find the test file [here](hardhat/test/test.spec.ts).
 
 ### Installing
 
-To run the python unit test files you'll need pytest and asynctest
+To run the python unit test files you'll need pytest and asynctest rich
 
 ```bash
 pip install pytest asynctest cairo-lang
@@ -126,15 +126,9 @@ pip install pytest asynctest cairo-lang
 
 The Python testing framework doesn't need to interact with the `starknet-devnet` as it can natively use the testing functions from the `cairo-lang` package so you can also use any python hint you want.
 
-You can even add a `breakpoint` in a contract. How powerful is that ?
+You can even add a `breakpoint` in a contract. How powerful is that ? But wait that's not it you can also inspect the memory stack and the state variables ! How cool is that ?
 
-You can run your python unit tests with
-
-```bash
-pytest
-```
-
- and inspect whatever you want in your contract.
+You can run your python unit tests with pytest and inspect whatever you want in your contract.
 
 The contracts to fix are [here](python/contracts).
 

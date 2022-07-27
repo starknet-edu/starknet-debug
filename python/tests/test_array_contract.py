@@ -3,7 +3,6 @@ import pytest
 from asynctest import TestCase
 from functools import reduce
 from starkware.starknet.testing.starknet import Starknet
-from starkware.starknet.compiler.compile import compile_starknet_files
 
 # The path to the contract source code.
 CONTRACT_FILE = os.path.join("contracts", "array_contract.cairo")
@@ -15,11 +14,9 @@ class CairoContractTest(TestCase):
     async def setUp(cls):
         cls.starknet = await Starknet.empty()
 
-        compiled_contract = compile_starknet_files(
-            [CONTRACT_FILE], debug_info=True, disable_hint_validation=True
+        cls.contract = await cls.starknet.deploy(
+            source=CONTRACT_FILE, disable_hint_validation=True
         )
-
-        cls.contract = await cls.starknet.deploy(contract_class=compiled_contract)
 
     @pytest.mark.asyncio
     async def test_array_contract(self):
