@@ -43,7 +43,6 @@ Do you have a question? Join our [Discord server](https://discord.gg/5QetpWWPE5)
 ​
 Are you interested in following online workshops about learning how to dev on StarkNet? [Subscribe here](http://eepurl.com/hFnpQ5)
 
-
 ### Contributing
 
 This project can be made better and will evolve as StarkNet matures. Your contributions are welcome! Here are things that you can do to help:
@@ -84,24 +83,27 @@ npm i
 pip install "starknet-devnet>=0.2.1" cairo-lang
 ```
 
-To setup a full `cairo` env you can take a look at [this article](https://medium.com/starknet-edu/the-ultimate-starknet-dev-environment-716724aef4a7). 
+To setup a full `cairo` env you can take a look at [this article](https://medium.com/starknet-edu/the-ultimate-starknet-dev-environment-716724aef4a7).
 
 ### Including hints in your contract
-By default, StarkNet contracts can not use any [hints](https://starknet.io/docs/how_cairo_works/hints.html) in their code. `cairo-lang` refuses to compile contracts including hints. 
 
-However, starknet-devnet lets you run hints if you compile your contracts so that they include them. 
+By default, StarkNet contracts can not use any [hints](https://starknet.io/docs/how_cairo_works/hints.html) in their code. `cairo-lang` refuses to compile contracts including hints.
 
-Luckily, an flag has been added in hardhat to compile a contract that includes hints: `--disable-hint-validation`. 
+However, starknet-devnet lets you run hints if you compile your contracts so that they include them.
+
+Luckily, an flag has been added in hardhat to compile a contract that includes hints: `--disable-hint-validation`.
 
 ***To debug a smart contract using hardhat you may want to print variables, there is an example in the smart contract.***
 
 ### Running tests
+
 The following command will run the hardhat tests that need to pass, and execute any hints included in the contract in the terminal
 
 ```bash
 npm run test
 ```
-Your goal is to have this test pass. 
+
+Your goal is to have this test pass.
 
 The contracts to fix are [here](hardhat/contracts).
 
@@ -111,6 +113,7 @@ You can find the test file [here](hardhat/test/test.spec.ts).
 ​
 
 ## Python
+
 ### Installing
 
 To run the python unit test files you'll need pytest and asynctest
@@ -118,16 +121,19 @@ To run the python unit test files you'll need pytest and asynctest
 ```bash
 pip install pytest asynctest cairo-lang
 ```
+
 ### Running tests
 
-The Python testing framework doesn't need to interact with the `starknet-devnet` as it can natively use the testing functions from the `cairo-lang` package so you can also use any python hint you want. 
+The Python testing framework doesn't need to interact with the `starknet-devnet` as it can natively use the testing functions from the `cairo-lang` package so you can also use any python hint you want.
 
-You can even add a `breakpoint` in a contract. How powerful is that ? 
+You can even add a `breakpoint` in a contract. How powerful is that ?
 
-You can run your python unit tests with 
+You can run your python unit tests with
+
 ```bash
 pytest
 ```
+
  and inspect whatever you want in your contract.
 
 The contracts to fix are [here](python/contracts).
@@ -149,11 +155,14 @@ Or all at once with:
 ```bash
 pytest -s -W ignore::DeprecationWarning
 ```
+
 ​
 ​
 
 ## Ape
+
 ### Installing
+
 To run the ape unit test files you'll need ape installed and configured. This is how you can do it:
 
 ```bash
@@ -168,6 +177,7 @@ If you want to learn a little bit more about ape [here](https://www.youtube.com/
 Since ape hides everything printed by the devnet we can use `print` to debug the contract. I chose to save the logs in a file but we could also setup a server that would receive data from the smart-contract execution or whatever other technique you can think of.
 
 ### Running tests
+
 To run the tests run the following command:
 
 ```bash
@@ -177,4 +187,3 @@ ape test
 The contracts to fix are [here](ape/contracts).
 
 You can find the test script [here](ape/tests).
-
