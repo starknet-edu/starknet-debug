@@ -4,6 +4,7 @@ starknet-artifacts
 __pycache__
 
 */yarn.lock
+package-lock.json
 .build/
 mock_logs.txt
 array_logs.txt
