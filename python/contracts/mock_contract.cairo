@@ -47,7 +47,7 @@ func fill_mapping{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
         console.print("Hey big boy look at me".upper(), style="bold underline #FFA500")
         console.print("Now that you reached this why do you try exotic stuff ...?", style="bold #FFA500")
         console.print("We're gonna mess with the memory now so brace yourself ", style="bold #FFA500")
-        console.print(str("Print the last filled memory cell with memory[ap-1]"), style="bold green") # should print 1
+        console.print("Print the last filled memory cell with memory[ap-1]", style="bold green") # should print 1
         console.print("Pretty cool huh? Now we're going to access a pointer's value", style="bold #FFA500")
         console.print("try memory[memory[ap-2]]", style="bold green") # should print array_len
         console.print("now icing on the cake we're gonna inspect the storage", style="bold #FFA500")
