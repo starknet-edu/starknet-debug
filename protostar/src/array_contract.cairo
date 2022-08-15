@@ -17,8 +17,8 @@ func view_product{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
     %{
         from requests import post
         json = { # creating the body of the post request so it's printed in the python script
-            "first_member": str(int(ids.val.first_member)),
-            "second_member": str(int(ids.val.second_member))
+            "first_member": ids.val.first_member,
+            "second_member": ids.val.second_member
         }
         post(url="http://localhost:5000", json=json) # sending the request to our small "server"
     %}
