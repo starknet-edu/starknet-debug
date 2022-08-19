@@ -198,6 +198,13 @@ Or all at once with:
 protostar test --disable-hint-validation
 ```
 
+NB if you are on MacOS and encountered `[__NSCFConstantString initialize] may have been in progress in another thread when fork() was called.`
+
+add OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES before protostar line e.g.:
+
+```bash
+OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES protostar test --disable-hint-validation
+```
 ## Ape
 
 ### Installing
