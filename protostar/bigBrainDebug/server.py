@@ -1,6 +1,7 @@
 import flask
 from flask import request
 import logging
+import os
 
 log = logging.getLogger("werkzeug")
 log.disabled = True
@@ -16,5 +17,5 @@ def home():
     counter += 1
     return "success"
 
-
-app.run()
+app.run(host=os.getenv('IP', '0.0.0.0'), 
+            port=int(os.getenv('PORT', 5000)))
