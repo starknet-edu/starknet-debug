@@ -6,7 +6,7 @@ Welcome! This tutorial will show you how to use StarkNet development tools to de
 - [StarkNet's native framework](https://www.cairo-lang.org/docs/hello_starknet/unit_tests.html)
 - [Ape](https://github.com/ApeWorX/ape-starknet)
 
-We'll use a functionality of the Cairo language called [hints](https://starknet.io/docs/how_cairo_works/hints.html), which allows you to inject python arbitrarily in your code. Hint usage is heavily restricted on StarkNet and is unapplicable in Smart Contracts. But it is extremely useful to debug your contract.
+We'll use a functionality of the Cairo language called [hints](https://starknet.io/docs/how_cairo_works/hints.html), which allows you to inject python arbitrarily in your code. Hint usage is heavily restricted on StarkNet and is unapplicable in Smart Contracts. But it is extremely useful to debug your contract. These debugging patterns are propositions that we made feel free to use any other one you can think of and to create a PR so everyone can know about it !
 
 ## Introduction
 
@@ -116,7 +116,7 @@ You can find the test file [here](hardhat/test/test.spec.ts).
 
 ### Installing
 
-To run the python unit test files you'll need pytest and asynctest
+To run the python unit test files you'll need pytest and asynctest rich
 
 ```bash
 pip install pytest asynctest cairo-lang
@@ -126,15 +126,9 @@ pip install pytest asynctest cairo-lang
 
 The Python testing framework doesn't need to interact with the `starknet-devnet` as it can natively use the testing functions from the `cairo-lang` package so you can also use any python hint you want.
 
-You can even add a `breakpoint` in a contract. How powerful is that ?
+You can even add a `breakpoint` in a contract. How powerful is that ? But wait that's not it you can also inspect the memory stack and the state variables ! How cool is that ?
 
-You can run your python unit tests with
-
-```bash
-pytest
-```
-
- and inspect whatever you want in your contract.
+You can run your python unit tests with pytest and inspect whatever you want in your contract.
 
 The contracts to fix are [here](python/contracts).
 
@@ -157,8 +151,60 @@ pytest -s -W ignore::DeprecationWarning
 ```
 
 ​
-​
 
+## Protostar
+
+### Installing
+
+To run the protostar unit test files you'll need protostar flask and requests
+
+```bash
+pip install flask requests
+curl -L https://raw.githubusercontent.com/software-mansion/protostar/master/install.sh | bash
+# https://github.com/software-mansion/protostar#installation
+```
+
+### Running tests
+
+So as the Python testing framework Protostar doesn't need to interact with the `starknet-devnet` as it can natively use the testing functions from the `cairo-lang` package. You have to specify that you want to use unwhitelisted hints with the flag `--disable-hint-validation`. Though Protostar doesn't give you full control over what's happening so you can't really use all the python code you wish. Nothing to worry about we've got you a biiiiig :brain: solution
+
+Adding a breakpoint and printing stuff is too mainstream right ?
+
+[Here](protostar/bigBrainDebug/server.py) is a simple script that listens to your port 5000 and will print the body of all the post requests it gets.
+
+The contracts to fix are [here](protostar/src).
+
+You can find the test script [here](protostar/tests).
+
+First you'll need to run the python script with:
+
+```bash
+python3 bigBrainDebug/server.py
+```
+
+Run the tests separately using:
+
+```bash
+protostar test tests/test_array_contract.cairo --disable-hint-validation
+```
+
+```bash
+protostar test tests/test_mock_contract.cairo --disable-hint-validation
+```
+
+Or all at once with:
+
+```bash
+protostar test --disable-hint-validation
+```
+
+NB if you are on MacOS and encountered `[__NSCFConstantString initialize] may have been in progress in another thread when fork() was called.`
+
+add OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES before protostar line e.g.:
+
+```bash
+OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES protostar test --disable-hint-validation
+```
 ## Ape
 
 ### Installing
@@ -166,7 +212,7 @@ pytest -s -W ignore::DeprecationWarning
 To run the ape unit test files you'll need ape installed and configured. This is how you can do it:
 
 ```bash
-pip install eth-ape "starknet.py==0.2.2a0"
+pip install eth-ape
 ape plugins install cairo starknet
 ```
 
