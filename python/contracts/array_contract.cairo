@@ -4,22 +4,22 @@ from starkware.cairo.common.cairo_builtins import HashBuiltin
 from starkware.starknet.common.syscalls import get_contract_address
 from starkware.cairo.common.registers import get_fp_and_pc
 
-struct BasicStruct:
-    member first_member : felt
-    member second_member : felt
-end
+struct BasicStruct {
+    first_member: felt,
+    second_member: felt,
+}
 
 @view
-func view_product{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-    array_len : felt, array : BasicStruct*
-) -> (res : felt):
-    alloc_locals
-    let fp_and_pc = get_fp_and_pc()
-    tempvar __fp__ = fp_and_pc.fp_val
-    tempvar ptr = array
-    local dummy = 9
-    # This could be useful for debugging...
-    tempvar val = [array]
+func view_product{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+    array_len: felt, array: BasicStruct*
+) -> (res: felt) {
+    alloc_locals;
+    let fp_and_pc = get_fp_and_pc();
+    tempvar __fp__ = fp_and_pc.fp_val;
+    tempvar ptr = array;
+    local dummy = 9;
+    // This could be useful for debugging...
+    tempvar val = [array];
     %{
         from rich.pretty import pprint
         from rich.console import Console
@@ -38,19 +38,19 @@ func view_product{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
         console.print("if you don't understand why it works like this you might want to read this https://www.cairo-lang.org/docs/how_cairo_works/consts.html#local-variables", style="bold green")
         breakpoint()
     %}
-    let (res) = array_product(array_len, array)
-    let (add) = get_contract_address()
-    return (res + add)
-end
+    let (res) = array_product(array_len, array);
+    let (add) = get_contract_address();
+    return (res + add,);
+}
 
-func array_product{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-    array_len : felt, array : BasicStruct*
-) -> (res : felt):
-    if array_len == 0:
-        return (0)
-    end
-    let temp = [array].first_member * [array].second_member
-    let (temp2) = array_product(array_len - 1, array)
-    let res = temp * temp2
-    return (res)
-end
+func array_product{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+    array_len: felt, array: BasicStruct*
+) -> (res: felt) {
+    if (array_len == 0) {
+        return (0,);
+    }
+    let temp = [array].first_member * [array].second_member;
+    let (temp2) = array_product(array_len - 1, array);
+    let res = temp * temp2;
+    return (res,);
+}

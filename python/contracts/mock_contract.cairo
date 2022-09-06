@@ -1,40 +1,40 @@
-# Declare this file as a StarkNet contract.
+// Declare this file as a StarkNet contract.
 %lang starknet
 
 from starkware.cairo.common.cairo_builtins import HashBuiltin
 from starkware.cairo.common.registers import get_fp_and_pc
 
 @storage_var
-func mapping(key) -> (value : felt):
-end
+func mapping(key) -> (value: felt) {
+}
 
 @storage_var
-func mapping_length() -> (value : felt):
-end
+func mapping_length() -> (value: felt) {
+}
 
 @constructor
-func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-    array_len : felt, array : felt*
-):
-    mapping_length.write(array_len)
-    fill_mapping(array_len, array)
-    return ()
-end
+func constructor{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+    array_len: felt, array: felt*
+) {
+    mapping_length.write(array_len);
+    fill_mapping(array_len, array);
+    return ();
+}
 
-func fill_mapping{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-    array_len : felt, array : felt*
-) -> ():
-    if array_len == 0:
-        return ()
-    end
-    alloc_locals
-    let fp_and_pc = get_fp_and_pc()
-    tempvar __fp__ = fp_and_pc.fp_val
+func fill_mapping{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+    array_len: felt, array: felt*
+) -> () {
+    if (array_len == 0) {
+        return ();
+    }
+    alloc_locals;
+    let fp_and_pc = get_fp_and_pc();
+    tempvar __fp__ = fp_and_pc.fp_val;
 
-    # This could be useful for debugging...
-    mapping.write(array_len, [array])
-    tempvar array_len_ptr = &array_len
-    tempvar val = [array]
+    // This could be useful for debugging...
+    mapping.write(array_len, [array]);
+    tempvar array_len_ptr = &array_len;
+    tempvar val = [array];
     %{
         from rich.pretty import pprint
         from rich.console import Console
@@ -56,28 +56,28 @@ func fill_mapping{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
 
         breakpoint()
     %}
-    fill_mapping(array_len - 1, array + 1)
-    return ()
-end
+    fill_mapping(array_len - 1, array + 1);
+    return ();
+}
 
 @view
-func product_mapping{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (
-    res : felt
-):
-    let (length) = mapping_length.read()
-    let (res) = product_mapping_internal(length)
-    return (res)
-end
+func product_mapping{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}() -> (
+    res: felt
+) {
+    let (length) = mapping_length.read();
+    let (res) = product_mapping_internal(length);
+    return (res,);
+}
 
-func product_mapping_internal{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-    len : felt
-) -> (res : felt):
-    if len == 0:
-        let (res) = mapping.read(len)
-        return (res)
-    end
-    let (temp) = product_mapping_internal(len - 1)
-    let (mapping_val) = mapping.read(len)
-    let res = temp * mapping_val
-    return (res)
-end
+func product_mapping_internal{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
+    len: felt
+) -> (res: felt) {
+    if (len == 0) {
+        let (res) = mapping.read(len);
+        return (res,);
+    }
+    let (temp) = product_mapping_internal(len - 1);
+    let (mapping_val) = mapping.read(len);
+    let res = temp * mapping_val;
+    return (res,);
+}
