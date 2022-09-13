@@ -15,6 +15,7 @@ func mapping_length() -> (value: felt) {
 func constructor{syscall_ptr: felt*, pedersen_ptr: HashBuiltin*, range_check_ptr}(
     array_len: felt, array: felt*
 ) {
+    %{ print("here") %}
     mapping_length.write(array_len);
     fill_mapping(array_len, array);
     return ();

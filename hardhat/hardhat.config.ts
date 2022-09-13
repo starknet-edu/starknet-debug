@@ -6,16 +6,19 @@ import "@shardlabs/starknet-hardhat-plugin";
  */
 const config: HardhatUserConfig = {
   starknet: {
-    // dockerizedVersion: "0.8.1",
     venv: "active",
-    network: "devnet",
+    network: "integratedDevnet",
   },
   networks: {
-    devnet: {
-      url: "http://127.0.0.1:5050/",
+    integratedDevnet: {
+      url: "http://127.0.0.1:5050",
+      venv: "/home/lucas/.local",
+      args: ["--lite-mode"],
+
+      stdout: "STDOUT",
     },
     testnet: {
-      url: "https://alpha4.starknet.io/",
+      url: "http://127.0.0.1:5050",
     },
   },
 };
