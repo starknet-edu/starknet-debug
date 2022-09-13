@@ -205,9 +205,12 @@ add OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES before protostar line e.g.:
 ```bash
 OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES protostar test --disable-hint-validation
 ```
+
 ## Ape
 
 ### Installing
+
+**The ape tutorial is not maintained. If you want it updated please open an issue**
 
 To run the ape unit test files you'll need ape installed and configured. This is how you can do it:
 
