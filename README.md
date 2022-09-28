@@ -4,9 +4,10 @@ Welcome! This tutorial will show you how to use StarkNet development tools to de
 
 - [Hardhat](https://github.com/Shard-Labs/starknet-hardhat-plugin)
 - [StarkNet's native framework](https://www.cairo-lang.org/docs/hello_starknet/unit_tests.html)
+- [Protostar](https://docs.swmansion.com/protostar/docs/tutorials/introduction)
 - [Ape](https://github.com/ApeWorX/ape-starknet)
 
-We'll use a functionality of the Cairo language called [hints](https://starknet.io/docs/how_cairo_works/hints.html), which allows you to inject python arbitrarily in your code. Hint usage is heavily restricted on StarkNet and is unapplicable in Smart Contracts. But it is extremely useful to debug your contract. These debugging patterns are propositions that we made feel free to use any other one you can think of and to create a PR so everyone can know about it !
+We'll use a functionality of the Cairo language called [hints](https://starknet.io/docs/how_cairo_works/hints.html), which allows you to inject python arbitrarily in your code. Hint usage is heavily restricted on StarkNet and is unapplicable in Smart Contracts. But it is extremely useful for debugging your contract. These debugging patterns are proposals we made, feel free to use any others you can think of and create a PR so everyone can know!
 
 ## Introduction
 
@@ -58,17 +59,16 @@ This project can be made better and will evolve as StarkNet matures. Your contri
 
 ### Smart contracts that need fixing
 
-The first smart contract [`array_contract.cairo`](python/contracts/array_contract.cairo) is a dummy smart contract which has a [view function](https://www.cairo-lang.org/docs/hello_starknet/intro.html) that needs to
+The first smart contract [`array_contract.cairo`](python/contracts/array_contract.cairo) is a dummy smart contract which has a [view function](https://www.cairo-lang.org/docs/hello_starknet/intro.html) that needs to:
 
-- Compute the product of each array element
+- Compute the product of each array element.
 - Add the current contract’s address to it.
 
-The second smart contract [`mock_contract.cairo`](python/contracts/mock_contract.cairo) is also a dummy smart contract which will save an array given at the initialization into a mapping and has a view function that needs to
+The second smart contract [`mock_contract.cairo`](python/contracts/mock_contract.cairo) is also a dummy smart contract that will save a given array on initialization into a mapping and has a view function that needs:
 
-- Compute the product of each mapping element
+- Compute the product of each mapping element.
 
-For each of those contracts, and each framework, your goal is that the tests pass correctly.
-
+For each of those contracts and each framework, your goal is for the tests to pass successfully.
 ​
 ​
 
@@ -126,7 +126,7 @@ pip install pytest asynctest cairo-lang
 
 The Python testing framework doesn't need to interact with the `starknet-devnet` as it can natively use the testing functions from the `cairo-lang` package so you can also use any python hint you want.
 
-You can even add a `breakpoint` in a contract. How powerful is that ? But wait that's not it you can also inspect the memory stack and the state variables ! How cool is that ?
+You can even add a `breakpoint` in a contract. How powerful is that? But wait that's not it you can also inspect the memory stack and the state variables! How cool is that?
 
 You can run your python unit tests with pytest and inspect whatever you want in your contract.
 
@@ -156,33 +156,34 @@ pytest -s -W ignore::DeprecationWarning
 
 ### Installing
 
-To run the protostar unit test files you'll need protostar flask and requests
+To run the Protostar unit test files you'll need to install `protostar`, `flask` and `requests`:
 
 ```bash
 pip install flask requests
 curl -L https://raw.githubusercontent.com/software-mansion/protostar/master/install.sh | bash
-# https://github.com/software-mansion/protostar#installation
 ```
+
+Check the [documentation](https://docs.swmansion.com/protostar/docs/tutorials/installation) for more details. 
 
 ### Running tests
 
-So as the Python testing framework Protostar doesn't need to interact with the `starknet-devnet` as it can natively use the testing functions from the `cairo-lang` package. You have to specify that you want to use unwhitelisted hints with the flag `--disable-hint-validation`. Though Protostar doesn't give you full control over what's happening so you can't really use all the python code you wish. Nothing to worry about we've got you a biiiiig :brain: solution
+As with the Python testing framework, Protostar doesn't need to interact with the `starknet-devnet` as it can natively use the testing functions from the `cairo-lang` package. When running the `protostar test` command, specify that you want to use unwhitelisted hints with the flag `--disable-hint-validation` (example below). Protostar doesn't give you full control over what's happening so you can't really use all the python code you wish. Nothing to worry about we've got for you a biiiiig :brain: solution.
 
-Adding a breakpoint and printing stuff is too mainstream right ?
+Adding a breakpoint and printing stuff is too mainstream right?
 
-[Here](protostar/bigBrainDebug/server.py) is a simple script that listens to your port 5000 and will print the body of all the post requests it gets.
+[Here](protostar/bigBrainDebug/server.py) is a simple script that listens to your port 5000 and prints the body of all the post requests it gets.
 
 The contracts to fix are [here](protostar/src).
 
-You can find the test script [here](protostar/tests).
+The tests scripts are [here](protostar/tests).
 
-First you'll need to run the python script with:
+First, run the python server with (you could left it open in another terminal):
 
 ```bash
 python3 bigBrainDebug/server.py
 ```
 
-Run the tests separately using:
+Remember that your goal is for the tests to pass successfully. Run the tests separately using:
 
 ```bash
 protostar test tests/test_array_contract.cairo --disable-hint-validation
@@ -198,9 +199,7 @@ Or all at once with:
 protostar test --disable-hint-validation
 ```
 
-NB if you are on MacOS and encountered `[__NSCFConstantString initialize] may have been in progress in another thread when fork() was called.`
-
-add OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES before protostar line e.g.:
+If you are on MacOS and encountered `[__NSCFConstantString initialize] may have been in progress in another thread when fork() was called.` add `OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES` before protostar line, e.g.:
 
 ```bash
 OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES protostar test --disable-hint-validation
