@@ -8,3 +8,4 @@ package-lock.json
 .build/
 mock_logs.txt
 array_logs.txt
+.idea
