@@ -32,7 +32,7 @@ describe("Testing the contracts", async function () {
     });
   });
 
-  describe("Test that you debugged the mock contract correctly", async () => {
+  describe("Test that you debugged the array contract correctly", async () => {
     it("Let's see if you made it", async () => {
       expect(
         (
@@ -44,7 +44,7 @@ describe("Testing the contracts", async function () {
     });
   });
 
-  describe("Test that you debugged the array contract correctly", async () => {
+  describe("Test that you debugged the mock contract correctly", async () => {
     it("Let's see if you made it", async () => {
       expect((await mockContract.call("product_mapping")).res).to.deep.eq(
         BigInt(ARRAY.reduce((a, b) => a * b, 1))
